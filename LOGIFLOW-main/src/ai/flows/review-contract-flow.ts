@@ -66,7 +66,7 @@ const reviewCarrierContractFlow = ai.defineFlow(
     inputSchema: ReviewCarrierContractInputSchema,
     outputSchema: ReviewCarrierContractOutputSchema,
   },
-  async (input) => {
+  async (input: any) => {
     const {output} = await prompt(input);
     return output!;
   }

@@ -73,18 +73,18 @@ export function InteractiveMapSection() {
     return () => clearInterval(intervalId); // Cleanup on unmount
   }, []);
 
-  const getStatusBadgeVariant = (status: Container['status']): VariantProps<typeof buttonVariants>['variant'] => {
+  const getStatusBadgeVariant = (status: Container['status']) => {
     switch (status) {
       case 'In Transit':
-        return 'default';
+        return 'default' as const;
       case 'At Port':
-        return 'secondary';
+        return 'secondary' as const;
       case 'Delivered':
-        return 'outline'; 
+        return 'outline' as const; 
       case 'Delayed':
-        return 'destructive';
+        return 'destructive' as const;
       default:
-        return 'default';
+        return 'default' as const;
     }
   };
 
@@ -98,14 +98,15 @@ export function InteractiveMapSection() {
           <MapPin className="h-6 w-6 text-primary" />
         </CardHeader>
         <CardContent>
-          <div className="aspect-video bg-muted rounded-md flex items-center justify-center p-4">
+          <div className="aspect-video bg-muted rounded-md flex items-center justify-center p-4 overflow-hidden">
             <Image
-              src="https://placehold.co/600x350.png"
-              alt="Placeholder map for container tracking"
+              src="/Three%20Semi-Trucks%20With%20Red%20And%20White%20Colors%20At%20Warehouse.png"
+              alt="Three Semi-Trucks with Red and White Colors at Warehouse"
               width={600}
               height={350}
-              className="rounded-md object-cover"
-              data-ai-hint="world map logistics"
+              className="rounded-md object-cover object-top"
+              style={{ objectPosition: 'center 30%' }}
+              priority
             />
           </div>
           

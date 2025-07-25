@@ -62,7 +62,7 @@ const optimizeDeliveryRoutesFlow = ai.defineFlow(
     inputSchema: OptimizeDeliveryRoutesInputSchema,
     outputSchema: OptimizeDeliveryRoutesOutputSchema,
   },
-  async input => {
+  async (input: any) => {
     const {output} = await prompt(input);
     return output!;
   }

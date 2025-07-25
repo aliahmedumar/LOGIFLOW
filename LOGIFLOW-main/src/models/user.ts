@@ -36,11 +36,11 @@ export async function createUsersTable(): Promise<void> {
  * @returns The created user
  */
 export async function createUser(email: string, name: string): Promise<User> {
-  const result = await query<User>(
+  const result = await query(
     'INSERT INTO users (email, name) VALUES ($1, $2) RETURNING *',
     [email, name]
   );
-  return result.rows[0];
+  return result.rows[0] as User;
 }
 
 /**
@@ -49,11 +49,11 @@ export async function createUser(email: string, name: string): Promise<User> {
  * @returns The user if found, null otherwise
  */
 export async function findUserByEmail(email: string): Promise<User | null> {
-  const result = await query<User>(
+  const result = await query(
     'SELECT * FROM users WHERE email = $1',
     [email]
   );
-  return result.rows[0] || null;
+  return (result.rows[0] as User) || null;
 }
 
 /**
@@ -62,11 +62,11 @@ export async function findUserByEmail(email: string): Promise<User | null> {
  * @returns The user if found, null otherwise
  */
 export async function findUserById(id: string): Promise<User | null> {
-  const result = await query<User>(
+  const result = await query(
     'SELECT * FROM users WHERE id = $1',
     [id]
   );
-  return result.rows[0] || null;
+  return (result.rows[0] as User) || null;
 }
 
 /**
@@ -109,13 +109,13 @@ export async function updateUser(
     RETURNING *
   `;
 
-  const result = await query<User>(queryText, values);
+  const result = await query(queryText, values);
   
   if (result.rows.length === 0) {
     throw new Error(`User with id ${id} not found`);
   }
   
-  return result.rows[0];
+  return result.rows[0] as User;
 }
 
 /**
@@ -128,5 +128,5 @@ export async function deleteUser(id: string): Promise<boolean> {
     'DELETE FROM users WHERE id = $1',
     [id]
   );
-  return result.rowCount > 0;
+  return (result.rowCount ?? 0) > 0;
 }

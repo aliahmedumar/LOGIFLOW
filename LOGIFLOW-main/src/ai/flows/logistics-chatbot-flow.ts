@@ -59,7 +59,7 @@ const logisticsChatbotFlow = ai.defineFlow(
     inputSchema: LogisticsChatbotInputSchema,
     outputSchema: LogisticsChatbotOutputSchema,
   },
-  async (input) => {
+  async (input: any) => {
     const {output} = await prompt(input);
     return output!;
   }

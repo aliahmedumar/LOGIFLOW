@@ -80,7 +80,7 @@ const forecastShipmentRiskFlow = ai.defineFlow(
     inputSchema: ForecastShipmentRiskInputSchema,
     outputSchema: ForecastShipmentRiskOutputSchema,
   },
-  async (input) => {
+  async (input: any) => {
     const {output} = await prompt(input);
     // Ensure confidence score is within bounds, LLMs might not always respect constraints
     if (output && output.confidenceScore > 1) output.confidenceScore = 1;

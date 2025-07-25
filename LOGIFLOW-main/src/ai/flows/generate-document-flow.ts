@@ -80,7 +80,7 @@ const generateDocumentFlow = ai.defineFlow(
     inputSchema: GenerateDocumentInputSchema,
     outputSchema: GenerateDocumentOutputSchema,
   },
-  async (input) => {
+  async (input: any) => {
     const {output} = await generateDocumentPrompt(input);
     if (!output) {
         throw new Error('AI failed to generate document content.');

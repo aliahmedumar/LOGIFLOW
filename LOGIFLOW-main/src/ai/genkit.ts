@@ -1,14 +1,14 @@
 
-import {genkit, type Genkit as GenkitType} from 'genkit';
-import {googleAI, type GoogleAIPlugin} from '@genkit-ai/googleai';
+import {genkit, type Genkit} from 'genkit';
+import {googleAI} from '@genkit-ai/googleai';
 
 // Augment globalThis for TypeScript to recognize our custom global variable
 declare global {
   // eslint-disable-next-line no-var
-  var __genkit_ai_instance: GenkitType<[GoogleAIPlugin]> | undefined;
+  var __genkit_ai_instance: Genkit | undefined;
 }
 
-let aiInstance: GenkitType<[GoogleAIPlugin]>;
+let aiInstance: Genkit;
 
 if (process.env.NODE_ENV === 'production') {
   // In production, always create a new instance
